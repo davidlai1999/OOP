@@ -1,0 +1,100 @@
+class Dice {
+    public int dice ;
+    public Dice() {
+        dice = 0 ;
+    } // dice()
+
+    public int getDicePoint() {
+        return dice ;
+    } // getDicePoint()
+
+    public void throwDiceP6() {
+        dice = ( int ) ( Math.random() * 6 + 1 ) ;
+    }
+
+    public void throwDiceP8() {
+        dice = ( int ) ( Math.random() * 8 + 1 ) ;
+    }
+}
+
+class Player {
+    public Dice dice1 ;
+    public Dice dice2 ;
+    public Dice dice3 ;
+    public int totaloftwodices ;
+    public int onedice;
+
+    public Player() {
+        dice1 = new Dice() ;
+        dice2 = new Dice() ;
+        dice3 = new Dice() ;
+        totaloftwodices = 0 ;
+        onedice = 0 ;
+    } // Player
+
+    public void throwDices() {
+        dice1.throwDiceP6() ;
+        dice2.throwDiceP6() ;
+        dice3.throwDiceP8() ;
+    } // throwDices
+
+    public int getTotalOfTwoDices() {
+        return totaloftwodices = dice1.getDicePoint() + dice2.getDicePoint() ;
+    }
+
+    public int getOneDice() {
+        return onedice = dice3.getDicePoint() ;
+    }
+}
+
+class Game {
+    public int p1win ;
+    public int p2win ;
+    public int draw ;
+    public Game () {
+        p1win = 0 ;
+        p2win = 0 ;
+        draw = 0 ;
+    }
+
+    public void compare( int p1num1, int p2num1, int p1num2, int p2num2 ) {
+        if ( p1num1 > p2num1 ) {
+            p1win++ ;
+        }
+        else if ( p1num1 < p2num1 ) {
+            p2win++ ;
+        }
+        else {
+            if ( p1num2 > p2num2 ) {
+                p1win++ ;
+            }
+            else if ( p1num2 < p2num2 ) {
+                p2win++ ;
+            }
+            else {
+              draw++ ;
+            } // else
+        } // else 
+    } // compare()
+
+    public void PrintAns() {
+      System.out.println( "Tom Win：" + p1win ) ;
+      System.out.println( "Mary Win：" + p2win ) ;
+      System.out.println( "Draw﹕：" + draw ) ;
+    } // PrintAns()
+} // testcode1()
+    
+class Main {
+public static void main( String[] args ) {
+        Player player1 = new Player() ;
+        Player player2 = new Player() ;
+        Game game = new Game() ;
+        for ( int i = 1 ; i <= 10 ; i++ ) {
+            player1.throwDices() ;
+            player2.throwDices() ;
+            game.compare( player1.getTotalOfTwoDices(), player2.getTotalOfTwoDices(), player1.getOneDice(), player2.getOneDice() ) ;
+            
+        }
+        game.PrintAns();
+    } // main
+} // Main
